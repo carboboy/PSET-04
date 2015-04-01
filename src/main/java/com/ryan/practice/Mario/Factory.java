@@ -5,19 +5,29 @@ package com.ryan.practice.Mario;
  */
 public class Factory {
 
-    private Factory() {}
+    private String option;
 
-    private static Factory factory;
-
-    public static Factory getInstance() {
-        if(factory == null) {
-            factory = new Factory();
-        }
-        return factory;
+    public Factory(String option) {
+        this.option = option;
     }
 
-    public void run(int option, int height) {
 
+    public void run(int height) {
+
+        Method m;
+
+        if(Integer.parseInt(option) == 1) {
+            m = new ConsolePrinter(height);
+            m.print();
+        } else if(Integer.parseInt(option) == 2) {
+            m = new FilePrinter(height);
+            m.print();
+        } else {
+            System.out.println("Please try again and insert proper values");
+        }
+    }
+
+    public static String calculate(int height) {
         String storage = "";
         int blockCounter = 2;
 
@@ -32,9 +42,6 @@ public class Factory {
             blockCounter++;
             storage = storage + "\n";
         }
-
-
-        Printer p = new Printer(option, storage);
-        p.print();
+        return storage;
     }
 }

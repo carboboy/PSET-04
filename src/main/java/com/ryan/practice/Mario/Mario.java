@@ -1,5 +1,6 @@
 package com.ryan.practice.Mario;
 
+import javafx.application.Application;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -11,25 +12,18 @@ import java.util.Scanner;
 public class Mario {
 
     public static void main(String[] varArgs) {
-
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("application.xml");
-
-        Mario obj = (Mario) context.getBean("Mario");
+        
+        Mario obj = new Mario();
         obj.start();
 
     }
 
-    private Factory factory;
-
-    public Mario(Factory factory) {
-
-        this.factory = factory;
-
-    }
     public void start(){
 
-        Mario m = new Mario(Factory.getInstance());
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+        Factory obj;
+
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Enter your preferred output\nEnter '1' for Console\nEnter '2' for TextFile\nOption: ");
@@ -37,7 +31,14 @@ public class Mario {
         System.out.print("Height: ");
         int height = scan.nextInt();
 
-        factory.run(option, height);
+
+        if(option == 1) {
+            obj = (Factory) context.getBean("console");
+            obj.run(height);
+        } else if(option == 2) {
+            obj = (Factory) context.getBean("file");
+            obj.run(height);
+        }
 
     }
 

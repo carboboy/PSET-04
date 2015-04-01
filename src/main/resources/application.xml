@@ -3,18 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="Mario" class="com.ryan.practice.Mario.Mario">
-        <constructor-arg name="factory" ref="fullFactory"/>
-    </bean>
-    <bean id="fullFactory" class="com.ryan.practice.Mario.Factory">
+    <bean id="console" class="com.ryan.practice.Mario.Factory">
+      <constructor-arg name="option" value="1"/>
     </bean>
 
-    <bean id="fullPrint" class="com.ryan.practice.Mario.Printer">
-          <constructor-arg name="option" value="1"/>
-        <constructor-arg name="storage" value=""/>
+    <bean id="file" class="com.ryan.practice.Mario.Factory">
+        <constructor-arg name="option" value="2"/>
     </bean>
-
-
 
 
 </beans>
